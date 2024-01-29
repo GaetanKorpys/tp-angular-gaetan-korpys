@@ -1,0 +1,11 @@
+<section>
+  <app-carte [employe]="employeAccueil" (personDelete)="deleteAccueil($event)"></app-carte>
+</section>
+
+<ng-template #noEmploye>
+  <span>Aucuns employés actuellement en base</span>
+</ng-template>
+
+<button id="refresh" mat-fab color="primary" (click)="random()">
+  <mat-icon>refresh</mat-icon>
+</button>
