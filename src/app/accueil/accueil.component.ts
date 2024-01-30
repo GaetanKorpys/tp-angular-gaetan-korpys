@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import { Person } from '../model/Person';
 import {HttpClient} from "@angular/common/http";
-import { ListPersonnelService } from '../partage/services/list-personnel-service.service';
+import { ListMusicService } from '../partage/services/list-music-service.service';
+import { Music } from '../model/Music';
+import { M } from '@angular/cdk/keycodes';
+import { mergeMap } from 'rxjs';
 
 @Component({
   selector: 'app-accueil',
@@ -10,23 +12,22 @@ import { ListPersonnelService } from '../partage/services/list-personnel-service
 })
 export class AccueilComponent implements OnInit {
 
+  musicList: Music[] = [];
 
-  //employeAccueil!: Person;
-
-  employeAccueil: Person = {};
+  musicAccueil: Music = {};
   
-  constructor(private readonly listPersonnelService:ListPersonnelService) {
+  constructor(private readonly listMusicService:ListMusicService) {
     this.random();
   }
 
   random() {
-    this.listPersonnelService.fetchRandom().subscribe(employe => {
-      this.employeAccueil = employe;
+    this.listMusicService.fetchRandom().subscribe(music => {
+      this.musicAccueil = music;
     });
   }
 
-  deleteAccueil(person: Person){
-    this.listPersonnelService.delete(person.id!).subscribe(() => {
+  deleteAccueil(music: Music){
+    this.listMusicService.delete(music.id!).subscribe(() => {
       this.random();
     });
   }

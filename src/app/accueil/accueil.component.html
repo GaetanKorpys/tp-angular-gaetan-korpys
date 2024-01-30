@@ -1,9 +1,9 @@
 <section>
-  <app-carte [employe]="employeAccueil" (personDelete)="deleteAccueil($event)"></app-carte>
+  <app-carte [music]="musicAccueil" (personDelete)="deleteAccueil($event)"></app-carte>
 </section>
 
 <ng-template #noEmploye>
-  <span>Aucuns employés actuellement en base</span>
+  <span>Aucunes musiques actuellement en base</span>
 </ng-template>
 
 <button id="refresh" mat-fab color="primary" (click)="random()">

@@ -1,15 +1,15 @@
 <mat-card class="carteCustom">
   <mat-card-header>
-    <img *ngIf="employe?.photo" mat-card-avatar [src]="employe?.photo" alt="Avatar de l'employé"/>
-    <mat-card-title>{{employe?.nom | uppercase}} {{employe?.prenom}}</mat-card-title>
+    <img *ngIf="music?.picture" mat-card-avatar [src]="music?.picture" alt="Image de la musique"/>
+    <mat-card-title>{{ music?.title | uppercase }}</mat-card-title>
     <mat-card-subtitle>
       <mat-card-content>
         <mat-chip-list>
-          <mat-chip color="primary" *ngFor="let titre of employe?.titres">
+          <mat-chip color="primary" *ngFor="let style of music?.styles">
             <mat-icon class="small">
-              work_outline
+              music_note
             </mat-icon>
-            {{titre}}
+            {{ style }}
           </mat-chip>
         </mat-chip-list>
       </mat-card-content>
@@ -17,21 +17,25 @@
   </mat-card-header>
   <mat-card-content>
     <mat-card-subtitle class="info">
-      <mat-icon>email</mat-icon>
-      <a
-        href="mailto:{{employe?.email}}"
-        title="Send an email to"
-        class="truncate"
-      >{{employe?.email}}</a>
+      <mat-icon>album</mat-icon>
+      {{ music?.album }}
     </mat-card-subtitle>
     <mat-card-subtitle class="info">
-      <mat-icon>phone</mat-icon>
-      <a href="tel:{{employe?.telephone}}" title="Call">{{employe?.telephone}}</a>
+      <mat-icon>person</mat-icon>
+      {{ music?.artist }}
+    </mat-card-subtitle>
+    <mat-card-subtitle class="info">
+      <mat-icon>schedule</mat-icon>
+      {{ music?.duration }}
+    </mat-card-subtitle>
+    <mat-card-subtitle class="info">
+      <mat-icon>event</mat-icon>
+      {{ music?.date | date}}
     </mat-card-subtitle>
   </mat-card-content>
 
   <mat-card-actions align="end">
-    <button mat-mini-fab aria-label="Editer" color="accent">
+    <button mat-mini-fab aria-label="Editer" color="accent" [routerLink]="['/edit', music?.id]">
       <mat-icon>edit</mat-icon>
     </button>
     <button mat-mini-fab aria-label="Supprimer" color="warn" (click)="delete()">

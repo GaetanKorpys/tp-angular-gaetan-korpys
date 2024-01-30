@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Person } from 'src/app/model/Person';
+import { Music } from 'src/app/model/Music';
+
 
 @Component({
   selector: 'app-carte',
@@ -10,7 +11,7 @@ export class CarteComponent implements OnInit {
 
   constructor() { }
 
-  @Input() employe: Person | undefined;
+  @Input() music: Music | undefined;
 
   @Output('personDelete') deleteCarte$: EventEmitter<any> = new EventEmitter();
 
@@ -20,11 +21,11 @@ export class CarteComponent implements OnInit {
   }
 
   delete() {
-    this.deleteCarte$.emit(this.employe);
+    this.deleteCarte$.emit(this.music);
   }
 
   update() {
-    this.update$.emit(this.employe);
+    this.update$.emit(this.music);
   }
 
 }

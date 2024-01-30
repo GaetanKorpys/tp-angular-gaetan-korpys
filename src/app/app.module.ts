@@ -34,11 +34,11 @@ import { CarteComponent } from './partage/carte/carte.component';
 import { HeaderComponent } from './header/header.component';
 import { DrawerComponent } from './drawer/drawer.component';
 import { ContactComponent } from './contact/contact.component';
-import { GraphComponent } from './graph/graph.component';
-import { ListPersonnelComponent } from './list-personnel/list-personnel.component';
 import { LangueBoutonComponent } from './langue-bouton/langue-bouton.component';
 import { FormulaireComponent } from './partage/formulaire/formulaire.component';
 import { AjoutPopupComponent } from './list-personnel/ajout-popup/ajout-popup.component';
+import { ListMusicComponent } from './list-personnel/list-music.component';
+import { EditionComponent } from './list-personnel/edition/edition.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -52,11 +52,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     HeaderComponent,
     DrawerComponent,
     ContactComponent,
-    GraphComponent,
-    ListPersonnelComponent,
+    ListMusicComponent,
     LangueBoutonComponent,
     FormulaireComponent,
     AjoutPopupComponent,
+    EditionComponent,
   ],
   imports: [
     BrowserModule,

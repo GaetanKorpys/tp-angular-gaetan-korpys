@@ -2,7 +2,7 @@ import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} f
 import {MatChipInputEvent} from "@angular/material/chips";
 import {COMMA, ENTER} from "@angular/cdk/keycodes";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {Person} from "../../model/Person";
+import { Music } from 'src/app/model/Music';
 
 @Component({
   selector: 'app-formulaire',
@@ -11,7 +11,7 @@ import {Person} from "../../model/Person";
 })
 export class FormulaireComponent implements OnInit {
   form: FormGroup;
-  @Input() employeModel: Person;
+  @Input() musicModel: Music;
   @ViewChild("fileInput") fileInput!: ElementRef;
 
   @Output('cancel') cancelEvent$: EventEmitter<any>;
@@ -23,22 +23,23 @@ export class FormulaireComponent implements OnInit {
     this.submitEvent$ = new EventEmitter();
     this.cancelEvent$ = new EventEmitter();
     this.form = FormulaireComponent.buildForm();
-    this.employeModel = {
-      titres: []
+    this.musicModel = {
+      styles: []
     };
   }
 
   ngOnInit() {
     debugger;
     this.form.patchValue({
-      id: this.employeModel.id,
-      nom: this.employeModel.nom,
-      prenom: this.employeModel.prenom,
-      email: this.employeModel.email,
-      titres: this.employeModel.titres || [],
-      sexe: this.employeModel.sexe,
-      photo: this.employeModel.photo,
-      telephone: this.employeModel.telephone
+      id: this.musicModel.id,
+      title: this.musicModel.title,
+      description: this.musicModel.description,
+      album: this.musicModel.album,
+      artist: this.musicModel.artist,
+      duration: this.musicModel.duration,
+      date: this.musicModel.date,
+      picture: this.musicModel.picture,
+      styles: this.musicModel.styles || []
     });
   }
 
@@ -46,23 +47,23 @@ export class FormulaireComponent implements OnInit {
     this.cancelEvent$.emit();
   }
 
-  submit(employe: Person) { //Formulaire
-    employe.photo = this.employeModel.photo;
-    this.submitEvent$.emit(employe);
+  submit(music: Music) { //Formulaire
+    music.picture = this.musicModel.picture;
+    this.submitEvent$.emit(music);
   }
 
 
   addChipset(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
     if (value) {
-      this.employeModel.titres!.push(value);
+      this.musicModel.styles!.push(value);
     }
     event.chipInput!.clear();
   }
 
-  removeChipset(titre: any): void {
-    const index = this.employeModel.titres!.indexOf(titre);
-    this.employeModel.titres!.splice(index, 1);
+  removeChipset(style: any): void {
+    const index = this.musicModel.styles!.indexOf(style);
+    this.musicModel.styles!.splice(index, 1);
   }
 
   onFileSelected(event:Event | null) {
@@ -73,7 +74,7 @@ export class FormulaireComponent implements OnInit {
         let reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onload = (_event) => {
-          this.employeModel.photo = reader.result;
+          this.musicModel.picture = reader.result;
         }
     }
   }
@@ -87,12 +88,12 @@ export class FormulaireComponent implements OnInit {
   private static buildForm(): FormGroup {
     return new FormGroup({
       id: new FormControl(''),
-      prenom: new FormControl('', Validators.compose([Validators.required, Validators.minLength(2)])),
-      nom: new FormControl('', Validators.compose([Validators.required, Validators.minLength(2)])),
-      email: new FormControl('', Validators.required),
-      titres: new FormControl(''),
-      sexe: new FormControl(''),
-      telephone: new FormControl('', Validators.compose([Validators.required, Validators.pattern('\\d{10}')])),
+      title: new FormControl('', Validators.compose([Validators.required, Validators.minLength(4)])),
+      description: new FormControl('', Validators.compose([Validators.required, Validators.minLength(10)])),
+      album: new FormControl('', Validators.compose([Validators.required, Validators.minLength(4)])),
+      artist: new FormControl('', Validators.compose([Validators.required, Validators.minLength(4)])),
+      duration: new FormControl('', Validators.compose([Validators.required, /**Validators.pattern('^\d{1,2}([.,]\d{1,2})?\s*(minute|min|mins)$')*/])),
+      date: new FormControl('', Validators.compose([Validators.required, Validators.pattern('[0-9]{4}-[0-9]{2}-[0-9]{2}')])),
     });
   }
 

@@ -10,16 +10,15 @@ export class ContactComponent implements AfterViewInit {
 
   @ViewChild("nom") nom: ElementRef<HTMLElement> | undefined;
   @ViewChild("prenom") prenom: ElementRef<HTMLElement> | undefined;
+  @ViewChild("email") email: ElementRef<HTMLElement> | undefined;
 
   constructor() {
-    //Vide
-
   }
 
   ngAfterViewInit(): void {
-    this.nom!.nativeElement!.innerHTML = "Petitdemange";
-    this.prenom!.nativeElement!.innerHTML = "Marc";
-    //Vide
+    this.nom!.nativeElement!.innerHTML = "Korpys";
+    this.prenom!.nativeElement!.innerHTML = "Gaëtan";
+    this.email!.nativeElement!.innerHTML = "gaetan.korpys9@etu.univ-lorraine.fr";
     }
 
 }
